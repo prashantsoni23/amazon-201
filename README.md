@@ -1,2 +1,2 @@
 # amazon-201
-This repository has all Apprenti 201 training related stuff
+This repository has all Apprenti 201 training related stuff written by Prashant Soni

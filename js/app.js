@@ -1,5 +1,6 @@
 'use strict';
 
+/*use of arrays*/
 var questions = ['Have I visited the United States anytime?',
   'Had I not entered into this profession, I would be a singer. Yes or No?',
   'Am I sad that Peoplesoft is going away?',
