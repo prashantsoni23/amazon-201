@@ -33,7 +33,38 @@ body div {
 body div img {
     float: left;
     margin: 1%;
+
 }
+
+.body-left {
+    float: left;
+    width: 70%;
+    outline-style: double;
+  }
+.body-right {
+    float: left;
+    width: 30%;
+    outline-style: double;
+    text-align: center;
+  }
+
+  ul {
+    background: #3399ff;
+    padding: 20px;
+  }
+
+  ul li {
+    background: #cce5ff;
+    margin: 5px;
+  }
+  
+  /* Clear floats after the columns */
+  .intro:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
 
 footer {
     background: #000;
