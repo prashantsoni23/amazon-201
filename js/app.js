@@ -42,7 +42,6 @@ if (initialQuestion.toLowerCase() === yesCriterion[0] || initialQuestion.toLower
     counter++;
   }
   console.log('Number of wrong attempts to get the correct answer of square root of 7:', counter);
-  alert('You got it right.. One final game to check how well you know about me!');
 
   /*For loop below*/
 
@@ -104,7 +103,10 @@ function validateSquareRoot(userGuess, square) {
     return 'you guessed too high';
   } else if (isNaN(userGuess) || userGuess === null) {
     return 'please enter an actual number';
+  } else if (userGuess === square) {
+    return 'You got it right.. One final game to check how well you know about me!'
   }
+
 }
 
 function validateFavorite(userGuess, favorites) {
