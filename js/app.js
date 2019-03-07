@@ -6,7 +6,7 @@ var questions = ['Have I visited the United States anytime?',
   'Am I sad that Peoplesoft is going away?',
   'Do I live in Hyderabad?',
   'Am I crazy about cars?'];
-
+var correctAns, message;
 var answersShort = ['Y', 'N', 'N', 'Y', 'Y'];
 var answersLong = ['Yes', 'No', 'No', 'Yes', 'Yes'];
 var correct = 0;
@@ -28,33 +28,18 @@ if (initialQuestion.toLowerCase() === yesCriterion[0] || initialQuestion.toLower
       console.log('Q' + (i + 1) + ' ' + questions[i] + '\n' + 'A' + (i + 1) + ' ' + userAnswer);
     }
     while (userAnswer === null || userAnswer.trim() === '');
-    if (userAnswer.toUpperCase() === answersShort[i] || userAnswer.toUpperCase() === answersLong[i].toUpperCase()) {
-      alert('You guessed it right!');
-      correct++;
-    }
-    else {
-      alert('Alas! You guessed it wrong or gave an invalid answer!');
-    }
+    alert(validateYNAnswer(userAnswer, i));
   }
   alert('You guessed ' + correct + ' answers correctly. Now an algebra question coming for you!');
 
   /*While loop below*/
 
   var algebraAnswer;
-  var counter = 0;
+  var counter = -1;
   while (algebraAnswer !== 49) {
-    algebraAnswer = parseInt(prompt('Do you know what is square of number 7?'));
-
-    if (algebraAnswer < 49) {
-      alert('Sorry you guessed too low');
-      counter++;
-    } else if (algebraAnswer > 49) {
-      alert('you guessed too high');
-      counter++;
-    } else if (isNaN(algebraAnswer) || algebraAnswer === null) {
-      alert('please enter an actual number');
-      counter++;
-    }
+    algebraAnswer = parseInt(prompt('What is square of number 7?'));
+    alert(validateSquareRoot(algebraAnswer, 49));
+    counter++;
   }
   console.log('Number of wrong attempts to get the correct answer of square root of 7:', counter);
   alert('You got it right.. One final game to check how well you know about me!');
@@ -68,31 +53,24 @@ if (initialQuestion.toLowerCase() === yesCriterion[0] || initialQuestion.toLower
 
   while (!flag && attemptCount < 6) {
     do {
-      var answer = prompt('Which is one of my favorite singers??');
+      var answer = prompt('Which is one of my favorite singer??');
     }
     while (answer === null || answer.trim() === '');
-
-    for (forCounter = 0; forCounter < singers.length; forCounter++) {
-      console.log('Loop count:', singers[forCounter]);
-      if (answer.toLowerCase() === singers[forCounter].toLowerCase()) {
-        alert('you got it right!');
-        flag = true;
-        break;
-      }
+    message = validateFavorite(answer, singers);
+    if (flag === true) {
+      alert(message);
+      break;
     }
-    if (!flag) {
-      attemptCount++;
-      if (attemptCount < 6) {
-        alert('incorrect guess - Try Again');
-        continue;
-      }
-      else {
-        break;
-      }
+    else if (attemptCount<6) {
+      alert(message);
+      continue;
+    }
+    else {
+      break;
     }
   }
   if (attemptCount >=6) {
-    alert ('You exhausted all your points.. take some rest now!');
+    alert ('You exhausted all your chances.. take some rest now!');
   }
 
   var finalReport = 'So ' + userName + ', here is your report card: ' + '\n'
@@ -109,5 +87,41 @@ else {
   alert('Invalid Response... seems like you are sleepy!. We\'ll play this game some other time');
 }
 
+function validateYNAnswer(userGuess, n) {
+  if (userGuess.toUpperCase() === answersShort[n] || userGuess.toUpperCase() === answersLong[n].toUpperCase()) {
+    correct++;
+    return 'You guessed it right!';
+  }
+  else {
+    return 'Alas! You guessed it wrong or gave an invalid answer!';
+  }
+}
 
+function validateSquareRoot(userGuess, square) {
+  if (userGuess < square) {
+    return 'Sorry you guessed too low';
+  } else if (userGuess > square) {
+    return 'you guessed too high';
+  } else if (isNaN(userGuess) || userGuess === null) {
+    return 'please enter an actual number';
+  }
+}
 
+function validateFavorite(userGuess, favorites) {
+  for (forCounter = 0; forCounter < favorites.length; forCounter++) {
+    console.log('Loop count:', favorites[forCounter]);
+    if (userGuess.toLowerCase() === favorites[forCounter].toLowerCase()) {
+      flag = true;
+      return 'you got it right!';
+    }
+  }
+  if (!flag) {
+    attemptCount++;
+    if (attemptCount < 6) {
+      return 'incorrect guess - Try Again';
+    }
+    else {
+       return 'exhausted all chances';
+    }
+    }
+}
